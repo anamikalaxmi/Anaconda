@@ -1,0 +1,20 @@
+    #include<stdio.h>
+    #include<stdlib.h>
+    int main()
+    {
+    char n[100]
+    int sn,nu,st,en
+	printf("Enter the passenger's name");
+	scanf("%c",&n);
+	printf("Enter the passenger's seat number");
+	scanf("%d",&sn);
+	printf("Enter the train number");
+	scanf("%d",&nu);
+	printf("Enter the start destination");
+	scanf("%c",&st);
+	printf("Enter the end destination");
+	scanf("%c",&en);
+	printf("Enter the train class (AC/RESERVED);
+	printf(n,age,no,st,en,"%c %d %d %c %c");
+retunr 0 ;
+}
