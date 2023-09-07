@@ -1,20 +1,80 @@
-    #include<stdio.h>
-    #include<stdlib.h>
-    int main()
-    {
-    char n[100]
-    int sn,nu,st,en
-	printf("Enter the passenger's name");
-	scanf("%c",&n);
-	printf("Enter the passenger's seat number");
-	scanf("%d",&sn);
-	printf("Enter the train number");
-	scanf("%d",&nu);
-	printf("Enter the start destination");
-	scanf("%c",&st);
-	printf("Enter the end destination");
-	scanf("%c",&en);
-	printf("Enter the train class (AC/RESERVED);
-	printf(n,age,no,st,en,"%c %d %d %c %c");
-retunr 0 ;
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+#define MAX_SEATS 50
+
+struct Reservation {
+    int seatNumber;
+    char passengerName[50];
+    bool reserved;
+};
+
+void initializeReservations(struct Reservation reservations[], int n) {
+    for (int i = 0; i < n; i++) {
+        reservations[i].seatNumber = i + 1;
+        reservations[i].reserved = false;
+        strcpy(reservations[i].passengerName, "Empty");
+    }
+}
+
+void displayAvailableSeats(struct Reservation reservations[], int n) {
+    printf("Available Seats:\n");
+    for (int i = 0; i < n; i++) {
+        if (!reservations[i].reserved) {
+            printf("Seat %d\n", reservations[i].seatNumber);
+        }
+    }
+}
+
+void reserveSeat(struct Reservation reservations[], int n) {
+    int seat;
+    printf("Enter the seat number you want to reserve: ");
+    scanf("%d", &seat);
+
+    if (seat >= 1 && seat <= n) {
+        if (!reservations[seat - 1].reserved) {
+            printf("Enter passenger name: ");
+            scanf("%s", reservations[seat - 1].passengerName);
+            reservations[seat - 1].reserved = true;
+            printf("Seat %d reserved for %s.\n", seat, reservations[seat - 1].passengerName);
+        } else {
+            printf("Seat %d is already reserved by %s.\n", seat, reservations[seat - 1].passengerName);
+        }
+    } else {
+        printf("Invalid seat number. Please enter a valid seat number.\n");
+    }
+}
+
+int main() {
+    struct Reservation reservations[MAX_SEATS];
+    int n = MAX_SEATS;
+
+    initializeReservations(reservations, n);
+
+    int choice;
+    do {
+        printf("\nRailway Reservation System\n");
+        printf("1. Display Available Seats\n");
+        printf("2. Reserve a Seat\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                displayAvailableSeats(reservations, n);
+                break;
+            case 2:
+                reserveSeat(reservations, n);
+                break;
+            case 3:
+                printf("Exiting the program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 3);
+
+    return 0;
 }
